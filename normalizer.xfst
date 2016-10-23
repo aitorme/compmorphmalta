@@ -1,0 +1,75 @@
+#############################
+#
+# This normalizer will remove the metadata from an online
+# news article and it will convert it into plain text,
+# by taking the text from the news in the <p> tags.
+# It has been tested on various online newspapers, such as
+# times of Malta (timesofmalta.com) and Naiz (naiz.eus).
+#
+#############################
+
+clear stack;
+
+define SP " ";
+
+define OP "<";
+
+define CP ">";
+
+#Rule to delete everything outside of the tags
+define rule2 ~${</p>} {<p>} @-> {<p>} .o. {</p>} ~${<p>} @-> {</p>};
+ 
+read regex rule2;
+
+apply down < gara.txt > input.marked;
+
+
+#a python code that removes the duplicated lines that "apply down" creates.
+system ./removeDuplicateLine.py input.marked 2
+
+#rule to delete the end of the hyperlinks
+define HYPERRULE1 "</a>" -> 0;
+
+#another rule for the beginning of the hyperlinks
+define HYPERRULE2 OP a ?* CP @-> 0;
+
+#rule to delete the beginning of quotes
+define QUOTERULE1 "&laquo;" -> 0;
+
+#rule to delete the ending of the quotes
+define QUOTERULE2 "&raquo;" -> 0;
+
+#rule to remove backslash from the text
+define BACKSLASHRULE %\ -> 0 || ?* _ ?*;
+
+#Rule to discard everything but the lines starting with <p> and ending with </p> 
+define INOUTRULE ?* @-> 0 || .#. \"<p>" _ \"</p>" .#. ;
+
+#Rule to remove tags
+define TAGRULE "<p>" @-> 0 .o. "</p>" @-> 0;
+
+#Rule to remove "greater than" and "smaller than" symbols
+define GREATSMALL %> -> 0 .o. %< -> 0; 
+
+#Rule to remove pictures, in case there are
+define PICRULE {img} SP {src} ?* @-> 0; 
+
+#Rule to convert uppercase letters into lowercase letters
+define UPPER2LOWER A -> a, B -> b, C -> c, D -> d, E -> e, F -> f, G -> g, H -> h, I -> i, J -> j, K -> k, L -> l, M -> m, N -> n, O -> o, P -> p, Q -> q, R -> r, S -> s, T -> t, U -> u, V -> v, W -> w, X -> x, Y -> y, Z -> z;
+
+#Rule to remove all lines with 2 characters
+define CAC2 ? ? -> 0 || .#. _ .#.;
+
+#Rule to remove all lines with 1 character
+define CAC1 ? -> 0 || .#. _ .#.;
+
+clear stack;
+
+read regex HYPERRULE1 .o. HYPERRULE2 .o. BACKSLASHRULE .o. UPPER2LOWER .o. QUOTERULE1 .o. QUOTERULE2 .o. INOUTRULE .o. TAGRULE .o. GREATSMALL .o. PICRULE .o. CAC2 .o. CAC1;
+
+
+apply down < input.marked.rdl > input.filt;
+
+system ./removeDuplicateLine.py input.filt
+
+system mv input.filt.rdl input.norm

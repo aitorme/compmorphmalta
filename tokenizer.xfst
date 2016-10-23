@@ -1,0 +1,68 @@
+
+clear stack
+echo >>> define white space
+define SP " ";
+define TAB "\t";
+define NL "\n";
+define APOS "'";
+define WS [SP|NL|TAB|APOS];
+
+# --------------------------------------------------------
+echo >>> define single character symbols
+define SINGLE [ %" | %. | %, | %; | %: | %! | %? | %( | %) | %[ | %] | %{ | %} ];
+
+define PUNCT [ %. %. (%.) | %‘ %‘ | %’ %’ | %, %, ] ;
+
+define Char \[ WS | SINGLE ] ;
+
+#---------------------------------------------------------
+echo >>> define SYMBOL
+define SYMBOL [ SINGLE | PUNCT ] ;
+echo >>> define WORD
+define WORD [ Char ]+ ;
+
+#---------------------------------------------------------
+#specific abbreviations
+echo >>> list of abbreviations
+define ABBR [ {Mr.} | {Mrs.} | {Ms.} | {etc.} | {e.g.} | {i.e.} | {ltd.} | {Ltd.} | {inc.} | {Inc.} ];
+
+#---------------------------------------------------------
+#abbreviations for names, etc.
+echo >>> regular abbreviations
+define Letter [A|B|C|D|E|F|G|H|I|J|K|L|M|
+N|O|P|Q|R|S|T|U|V|W|X|Y|Z
+|a|b|c|d|e|f|g|h|i|j|k|l|m|
+n|o|p|q|r|s|t|u|v|w|x|y|z
+];
+define INIT [ Letter %. ]+ ;
+
+#----------------------------------------------------------
+echo >>> numeric expressions
+define Digit [ %0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9];
+define NumOp [ %- | %+ | %* | %/ | %= | %: ];
+define NumSep [ %. | %, ];
+define NUM [ Digit | NumOp | NumSep]+ & $[Digit] ;
+
+#----------------------------------------------------------
+#echo >>> some multi-word expressions (it is not necessary to use them in this case)
+#define MWE [
+#{a priori} | {A priori} | {ad hoc} | {Ad hoc} | 
+#{New York} | {Hong Kong} | {Tel Aviv} | {to and fro}
+#];
+
+#----------------------------------------------------------
+echo >>> define tokens
+define Token [ WORD | SYMBOL | ABBR | INIT | NUM ];
+
+#----------------------------------------------------------
+#insert a newline after each token
+echo >>> insert new lines 
+define TOK1 [ Token @-> ... NL ] ;
+echo >>> map spaces to a newline
+define TOK2 [ [WS]+ @-> NL ];
+
+#----------------------------------------------------------
+echo >>> compose
+read regex [TOK1 .o. TOK2 ];
+invert net
+save stack token.fst

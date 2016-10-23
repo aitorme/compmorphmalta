@@ -1,0 +1,230 @@
+#######################
+#
+# A simple morphological analyzer for Basque
+#
+#
+#######################
+
+define NOUN [ e u s k a r a | e r a s o | m u g a | e r a n t z u n | g a r a i | m o b i l i z a z i o | k o n t s e i l u | o t s a i l a | D a t a | h e r r i | e s k u | g o g o | e r a n t z u k i z u n | B i l e r a | e r r o n d a | a l d e r d i | o r d e z k a r i | e r a g i l e | k o n p r o m i s o | o p a r i | i r a k u r k e t a | z u z e n d a r i t z a | t a l d e | a g e r r a l d i | o r d u | A l d u n d i | D o n o s t i a | e s t a t u | C a r l o s | U r k i j o | b i d e | P a t r i c k | D a l l e n n e s | e g o e r a | n e u r r i | i d a z k a r i | P a u l | B i l b a o | u d a l | b a b e s | a l b i s t e | i k u r | i n f o r m a z i o | i n g u r u | a u z i t a r a | U E M A | G i p u z k o a | F o r u | U z t a r i t z e | b a l i o | h e l b u r u | a p u s t u a | d e t e r m i n a z i o | i n s t i t u z i o | E u s k a r a | K o n t s e i l u | h e r r i t a r | b i l e r a | E s t a t u | U r q u i j o | U d a l | d a t a | I k u r | I n f o r m a z i o | d o n o s t i a | c a r l o s | u r q u i j o | p a t r i c k | d a l l e n n e s | p a u l  | b i l b a o | u e m a | g i p u z k o a | f o r u | a l d u n d i a | u z t a r i t z ] %+NOUN:0;
+
+define DETERMINER [ g u z t i | b a t | h a u | h o r i | h u r a | h a u e k | h o r i e k | h a i e k ] %+DET:0;
+
+define ADJECTIVE [ i n s t i t u z i o n a l | h a r p i d e d u n | e s p a i n o l | f r a n t s e s | n a g u s i | a z k e n | j u r i d i k o ] %+ADJ:0;
+
+define PRONOUN [ G u | z u | n i | z u e k | h a i e k | b e r a | h o n e n | g u r e a | g u ] %+PRON:0;
+
+define SUFFIX [ r e n | e k | a k | a | k | e i | e k i n | z | r i | e n | k o | n | a r i ];
+
+define ADVERB [ a u r k a | e z i n | p r e s t | g a u r | g o i z | a u r r e | e z | s o i l i k | b a i | a z k e n | h e m e n | e r e | a u r r e a n | d o a n | e g u n e r o | g e h i a g o | o s o ] %+ADVB:0;
+
+define VERB [ g a i n d i t u | e m a n | i r i t z i | a n t o l a t u | g o r d e t u | e s k a t u | u t z i | p a r t e k a t u | o h a r t a r a z i | e g i n | n a b a r m e n d u | h a r t u | i k u s i | e r r a n | o r d a i n d u | b a t e r a t u | a u r k e z t u | e r a m a n | a g e r t u | b i z i | n a h i | i z a n | e r a k u t s i | k e n d u | e u t s i | z i u r t a t u | i r a k u r r i | e r r e g i s t r a t u ];
+
+define POSTPOS [ b e h a r | b e h a r r e k o a k | b e h a r r e k o | g i s a ] %+POSTPOS:0;
+
+#define VERBFIX [ l a | t e k o | t a | k o | e n | z e k o | n | d a k o | g o | e l a | t z e k o ];
+
+define CONJ [ e t a | b a i n a | B a i n a ] %+CONJ:0;
+
+define NUMERAL [ 2 8 | l e h e n a k | b i g a r r e n a k | h a m a b o s t | d e n a | 2 8 a ] %+NUM:0;
+
+define ADVBCLAUSE [ 2 8 r a k o ] %+ADVBCLAUSE:0;
+
+define RELATIVE [ z e ] %+REL:0;
+
+define CONJUNCT [ h o r r e k i n | H o r r e k i n | b a t e r a ] %+CONJUNCT:0;
+
+define PUNCT [ "." | "," | ":" ] %+PUNC:0;
+
+
+#--------------------------------------------------------
+echo >>> rules for verbs
+
+define VERBPOS %+VB:0;
+
+define FUTUREMARK [0 | %+VBF:{ko} ];
+
+define FINALCASE [{iritsi}:{iristeko} | {eman}:{emateko} | {gainditu}:{gainditzeko} | {iritzi}:{irizteko} | {antolatu}:{antolatzeko} | {gordetu}:{gordetzeko} | {eskatu}:{eskatzeko} | {utzi}:{uzteko} | {partekatu}:{partekatzeko} | {ohartarazi}:{ohartarazteko} | {egin}:{egiteko} | {nabarmendu}:{nabarmentzeko} | {hartu}:{hartzeko} | {ikusi}:{ikusteko} | {erran}:{erratzeko} | {ordaindu}:{ordaintzeko} | {bateratu}:{bateratzeko} | {aurkeztu}:{aurkezteko} | {eraman}:{eramateko} | {agertu}:{agertzeko} | {bizi}:{bizitzeko} | {izan}:{izateko} | {erakutsi}:{erakusteko} | {kendu}:{kentzeko} | {eutsi}:{eusteko} | {ziurtatu}:{ziurtatzeko} | {irakurri}:{irakurtzeko} | {erregistratu}:{erregistratzeko} | {esan}:{esateko} ] %+VB:0 %+FIN:0;
+
+define DIALECTALFINALCASE [{iritsi}:{iritsiten} | {eman}:{emanen} | {gainditu}:{gaindituten} | {iritzi}:{iritziten} | {antolatu}:{antolatuten} | {gordetu}:{gordetuten} | {eskatu}:{eskatuten} | {utzi}:{utziten} | {partekatu}:{partekatuten} | {ohartarazi}:{ohartaraziten} | {egin}:{eginen} | {nabarmendu}:{nabarmenduten} | {hartu}:{hartuten} | {ikusi}:{ikusiten} | {erran}:{erranen} | {ordaindu}:{ordainduten} | {bateratu}:{bateratuten} | {aurkeztu}:{aurkeztuten} | {eraman}:{eramanen} | {agertu}:{agertuten} | {bizi}:{biziten} | {izan}:{izanen} | {erakutsi}:{erakutsiten} | {kendu}:{kenduten} | {eutsi}:{eutsiten} | {ziurtatu}:{ziurtatuten} | {irakurri}:{irakurriten} | {erregistratu}:{erregistratuten} | {esan}:{esanen} ] %+VB:0 %+FIN:0;
+
+define GERUND [{iritsi}:{iristen} | {eman}:{ematen} | {gainditu}:{gainditzen} | {iritzi}:{irizten} | {antolatu}:{antolatzen} | {gordetu}:{gordetzen} | {eskatu}:{eskatzen} | {utzi}:{uzten} | {partekatu}:{partekatzen} | {ohartarazi}:{ohartarazten} | {egin}:{egiten} | {nabarmendu}:{nabarmentzen} | {hartu}:{hartzen} | {ikusi}:{ikusten} | {erran}:{erratzen} | {ordaindu}:{ordaintzen} | {bateratu}:{bateratzen} | {aurkeztu}:{aurkezten} | {eraman}:{eramaten} | {agertu}:{agertzen} | {bizi}:{bizitzen} | {izan}:{izaten} | {erakutsi}:{erakusten} | {kendu}:{kentzen} | {eutsi}:{eusten} | {ziurtatu}:{ziurtatzen} | {irakurri}:{irakurtzen} | {erregistratu}:{erregistratzen} | {esan}:{esaten} ] %+VB:0 %+GER:0;
+
+define ADJECTIVALPARTICIPLE [{iritsi}:{iritsita} | {eman}:{emanda} | {gainditu}:{gaindituta} | {iritzi}:{iritzita} | {antolatu}:{antolatuta} | {gordetu}:{gordeta} | {eskatu}:{eskatuta} | {utzi}:{utzita} | {partekatu}:{partekatua} | {ohartarazi}:{ohartaraztuta} | {egin}:{eginda} | {nabarmendu}:{nabarmenduta} | {hartu}:{hartuta} | {ikusi}:{ikusita} | {erran}:{erranda} | {ordaindu}:{ordainduta} | {bateratu}:{bateratua} | {aurkeztu}:{aurkeztuta} | {eraman}:{eramanda} | {agertu}:{agertuta} | {bizi}:{bizita} | {izan}:{izanda} | {erakutsi}:{erakutsita} | {kendu}:{kenduta} | {eutsi}:{eutsita} | {ziurtatu}:{ziurtatuta} | {irakurri}:{irakurrita} | {erregistratu}:{erregistratuta} | {esan}:{esanda} ] %+VB:0 %+ADJPP:0;
+
+define ADJECTIVALRELATIVE [{iritsi}:{iritsitako} | {eman}:{emandako} | {gainditu}:{gainditutako} | {iritzi}:{iritzitako} | {antolatu}:{antolatutako} | {gordetu}:{gordetako} | {eskatu}:{eskatutako} | {utzi}:{utzitako} | {partekatu}:{partekatutako} | {ohartarazi}:{ohartaraztutako} | {egin}:{egindako} | {nabarmendu}:{nabarmendutako} | {hartu}:{hartutako} | {ikusi}:{ikusitako} | {erran}:{errandako} | {ordaindu}:{ordaindutako} | {bateratu}:{bateratutako} | {aurkeztu}:{aurkeztutako} | {eraman}:{eramandako} | {agertu}:{agertutako} | {bizi}:{bizitako} | {izan}:{izandako} | {erakutsi}:{erakutsitako} | {kendu}:{kendutako} | {eutsi}:{eutsitako} | {ziurtatu}:{ziurtatutako} | {irakurri}:{irakurritako} | {erregistratu}:{erregistratutako} | {esan}:{esandako} ] %+VB:0 %+ADJREL:0;
+
+define FUTURERULE1 k -> g || ?* n _ o .#.;
+
+define VERBCAT VERB VERBPOS FUTUREMARK;
+
+#------------------------------------------------------------------------------------------------------------------------------
+echo >>> rules for auxiliar verbs, which play a fundamental role in the sentence understanding of Basque
+
+define BEHARREKOAK [{behar}:{beharrekoak}] %+VB:0 %+NOMINALIZATION:0;
+
+define AUXVERB1 [{edun}:{du}] %+AUX:0 %+3PSGSUBJECT%-3PSGOBJECT:0;
+
+define AUXVERB2 [{edun}:{dituzte}] %+AUX:0 %+3PPLSUBJECT%-3PPLOBJECT:0;
+
+define AUXVERB3 [{edin}:{die}] %+AUX:0 %+3PSGSUBJECT%-3PSGOBJECT%-3PPLINDIRECT:0;
+
+define AUXVERB4 [{egon}:{daude}] %+AUX:0 %+3PPL:0;
+
+define AUXVERB5 [{egon}:{dago}] %+AUX:0 %+3PSG:0;
+
+define AUXVERB6 [{edun}:{dute}] %+AUX:0 %+3PPLSUBJECT%-3PSGOBJECT:0;
+
+define AUXVERB7 [{edin}:{diote}] %+AUX:0 %+3PPLSUBJECT%-%3PSGOBJECT%-3PSGINDIRECT:0;
+
+define AUXVERB8 [{edun}:{dugu}] %+AUX:0 %+1PPLSUBJECT%-3PSGOBJECT:0;
+
+define AUXVERB9 [{edun}:{duzu}] %+AUX:0 %+2PSGSUBJECT%-3PSGOBJECT:0;
+
+define AUXVERB10 [{egon}:{bazara}] %+AUX:0 %+2PSGSUBJECT:0 %+CONDITIONAL:0;
+
+define AUXVERB11 [{izan}:{dela}] %+AUX:0 %+3PSGSUBJECT:0 %+RELATIVECLAUSE:0;
+
+define AUXVERB12 [{izan}:{dira}] %+AUX:0 %+3PPLSUBJECT:0;
+
+define RELATIVECLAUSEMARK [ 0 | %+REL:{ela} ];
+
+define NOMINALRELATIVECLAUSE [ 0 | %+RELNOM:{en} ];
+
+define RELATIVECLAUSEMARKRULE1 e -> 0 || ?* e _ l a .#.;
+
+define NOMINALRELATIVECLAUSERULE1 e -> 0 || ?* e _ n .#.;
+
+define AUXILIARVERB1 AUXVERB1 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB2 AUXVERB2 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB3 AUXVERB3 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB4 AUXVERB4 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB5 AUXVERB5 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB6 AUXVERB6 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB7 AUXVERB7 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB8 AUXVERB8 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB9 AUXVERB9 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+define AUXILIARVERB10 AUXVERB10 RELATIVECLAUSEMARK NOMINALRELATIVECLAUSE;
+
+read regex VERBCAT .o. FUTURERULE1;
+
+read regex FINALCASE;
+
+read regex DIALECTALFINALCASE;
+
+read regex GERUND;
+
+read regex ADJECTIVALPARTICIPLE;
+
+read regex ADJECTIVALRELATIVE;
+
+read regex BEHARREKOAK;
+
+read regex AUXILIARVERB1 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB2 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB3 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB4 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB5 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB6 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB7 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB8 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB9 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXILIARVERB10 .o. RELATIVECLAUSEMARKRULE1 .o. NOMINALRELATIVECLAUSERULE1;
+
+read regex AUXVERB11;
+
+read regex AUXVERB12;
+
+#read regex VERBCAT .o. FUTUREMARK .o. FUTURERULE1;
+
+#--------------------------------------------------------
+echo >>> rules for nouns
+
+#here there are defined different cases for Basque. The absolutive case is the subject of an intransitive clause or the direct object of a transitive sentence. The ergative is the transitive subject. The dative is the affected or the recipient. The inessive is the place where or the time when, in English 'in', 'at' or 'on' are used for this purpose. The allative case is equivalent to "where to". Thus, the preposition "to" is the direct translation in English. Regarding the ablative case, it refers to where from or through; in English, it is translated as 'from', 'since' or 'through'. The instrumental case is used to express means or topic, with the prepositions "by", "of" or "about". The comitative case refers to accompaniment or means (the preposition "with" is used in this case). The benefactive case simply expresses the beneficiary ('for'). 
+define CASES [0 | [%+ABS %+SG]:a | [%+ABS %+PL]:{ak} | [%+ERG %+SG]:{ak} | [%+ERG %+PL]:{ek} | [%+ERG %+UNL]:k | [%+GEN %+PLACE %+SG]:{ko} | [%+GEN %+PLACE %+SG]:{go} | [%+GEN %+PLACE %+SG]:{eko} | [%+GEN %+PLACE %+PL]:{etako} | [%+GEN %+PLACE %+UNL]:{tako} | [%+GEN %+POSS %+SG]:{aren} | [%+GEN %+POSS %+SG]:{ren} | [%+GEN %+POSS %+PL]:{en} | [%+DAT %+SG]:{ari} | [%+DAT %+PL]:{ei} | [%+DAT %+SG]:{rari} | [%+DAT %+PL]:{rei} | [%+DAT %+UNL]:i | [%+DAT %+UNL]:{ri} | [%+COMMITATIVE %+SG]:{arekin} | [%+COMMITATIVE %+SG]:{rekin} | [%+COMMITATIVE %+PL]:{ekin} | [%+COMMITATIVE %+UNL]:{rekin} | [%+INSTRUMENTAL %+SG]:{az} [%+INSTRUMENTAL %+PL]:{ez} | [%+INSTRUMENTAL %+UNL]:z | [%+INSTRUMENTAL %+UNL]:{taz} | [%+BENEFACTIVE %+SG]:{arentzat} | [%+BENEFACTIVE %+PL]:{entzat} | [%+BENEFACTIVE %+UNL]:{rentzat} | [%+CAUSAL %+SG]:{arengatik} | [%+CAUSAL %+PL]:{engatik} | [%+CAUSAL %+UNL]:{rengatik} | %+PARTITIVE:{rik} | %+PARTITIVE:{ik} | [%+INESSIVE %+SG]:{ean} | [%+INESSIVE %+SG]:{an} | [%+INESSIVE %+PL]:{etan} | [%+INESSIVE %+UNL]:{tan} | [%+INESSIVE %+UNL]:{en} | [%+INESSIVE %+UNL]:{n} | [%+ALLATIVE %+SG]:{era} | [%+ALLATIVE %+SG]:{ra} | [%+ALLATIVE %+PL]:{etara} | [%+ALLATIVE %+UNL]:{tara} | [%+ALLATIVE %+UNL]:{ra} | [%+ABLATIVE %+SG]:{etik} | [%+ABLATIVE %+SG]:{tik} | [%+ABLATIVE %+PL]:{etatik} | [%+ABLATIVE %+UNL]:{tatik} | [%+ABLATIVE %+UNL]:{tik} | [%+ABLATIVE %+UNL]:{dik}];
+
+define ABSORULE1 a -> 0 || ?* a _ .#.;
+
+define ABSORULE2 a -> 0 || ?* a _ k .#.;
+
+define ERGATIVE [ [%+ERG %+SG]:{ak} | [%+ERG %+PL]:{ek}];
+
+define NOUNCAT NOUN CASES;
+
+read regex NOUNCAT .o. ABSORULE1 .o. ABSORULE2;
+
+#-------------------------------------------------------
+#the same rule as before also applies to adjectives
+
+define ABSOADJ [0 | [%+ABS %+SG]:a | [%+ABS %+PL]:{ak} | [%+ERG %+SG]:{ak} | [%+ERG %+PL]:{ek} | [%+ERG %+UNL]:k | [%+GEN %+PLACE %+SG]:{ko} | [%+GEN %+PLACE %+SG]:{go} | [%+GEN %+PLACE %+SG]:{eko} | [%+GEN %+PLACE %+PL]:{etako} | [%+GEN %+PLACE %+UNL]:{tako} | [%+GEN %+POSS %+SG]:{aren} | [%+GEN %+POSS %+SG]:{ren} | [%+GEN %+POSS %+PL]:{en} | [%+DAT %+SG]:{ari} | [%+DAT %+PL]:{ei} | [%+DAT %+SG]:{rari} | [%+DAT %+PL]:{rei} | [%+DAT %+UNL]:i | [%+DAT %+UNL]:{ri} | [%+COMMITATIVE %+SG]:{arekin} | [%+COMMITATIVE %+SG]:{rekin} | [%+COMMITATIVE %+PL]:{ekin} | [%+COMMITATIVE %+UNL]:{rekin} | [%+INSTRUMENTAL %+SG]:{az} [%+INSTRUMENTAL %+PL]:{ez} | [%+INSTRUMENTAL %+UNL]:z | [%+INSTRUMENTAL %+UNL]:{taz} | [%+BENEFACTIVE %+SG]:{arentzat} | [%+BENEFACTIVE %+PL]:{entzat} | [%+BENEFACTIVE %+UNL]:{rentzat} | [%+CAUSAL %+SG]:{arengatik} | [%+CAUSAL %+PL]:{engatik} | [%+CAUSAL %+UNL]:{rengatik} | %+PARTITIVE:{rik} | %+PARTITIVE:{ik} | [%+INESSIVE %+SG]:{ean} | [%+INESSIVE %+SG]:{an} | [%+INESSIVE %+PL]:{etan} | [%+INESSIVE %+UNL]:{tan} | [%+INESSIVE %+UNL]:{en} | [%+INESSIVE %+UNL]:{n} | [%+ALLATIVE %+SG]:{era} | [%+ALLATIVE %+SG]:{ra} | [%+ALLATIVE %+PL]:{etara} | [%+ALLATIVE %+UNL]:{tara} | [%+ALLATIVE %+UNL]:{ra} | [%+ABLATIVE %+SG]:{etik} | [%+ABLATIVE %+SG]:{tik} | [%+ABLATIVE %+PL]:{etatik} | [%+ABLATIVE %+UNL]:{tatik} | [%+ABLATIVE %+UNL]:{tik} | [%+ABLATIVE %+UNL]:{dik}];
+
+define NEWADJ ADJECTIVE ABSOADJ;
+
+read regex NEWADJ;
+#--------------------------------------------------------
+
+read regex DETERMINER;
+
+define GUZTIAK [{guzti}:{guztiak} %+DET:0 %+ABS:0];
+
+read regex GUZTIAK;
+
+#---------------------------------------------------------
+echo >>> adverbs
+
+#adverbs convert into adjectives with this rule in Basque
+define ADVBRULE1 [ 0 | %+ADJISH:{ko} | %+ADJISH:{go}];
+
+define OSORULE [{oso}:{osoa}] %+ADVB:0 %+ABS:0;
+
+define ADVBSUFFIX [ 0 | %+LOCATIVE:{ean}];
+
+read regex ADVERB ADVBSUFFIX ADVBRULE1;
+
+read regex OSORULE;
+
+#--------------------------------------------------------
+
+define PRONOUNCASE [0 | [%+ABS %+SG]:a | [%+ABS %+PL]:{ak} | [%+ERG %+SG]:{ak} | [%+ERG %+PL]:{ek} | [%+ERG %+UNL]:k | [%+GEN %+PLACE %+SG]:{ko} | [%+GEN %+PLACE %+SG]:{go} | [%+GEN %+PLACE %+SG]:{eko} | [%+GEN %+PLACE %+PL]:{etako} | [%+GEN %+PLACE %+UNL]:{tako} | [%+GEN %+POSS %+SG]:{aren} | [%+GEN %+POSS %+SG]:{ren} | [%+GEN %+POSS %+PL]:{en} | [%+DAT %+SG]:{ari} | [%+DAT %+PL]:{ei} | [%+DAT %+SG]:{rari} | [%+DAT %+PL]:{rei} | [%+DAT %+UNL]:i | [%+DAT %+UNL]:{ri} | [%+COMMITATIVE %+SG]:{arekin} | [%+COMMITATIVE %+SG]:{rekin} | [%+COMMITATIVE %+PL]:{ekin} | [%+COMMITATIVE %+UNL]:{rekin} | [%+INSTRUMENTAL %+SG]:{az} [%+INSTRUMENTAL %+PL]:{ez} | [%+INSTRUMENTAL %+UNL]:z | [%+INSTRUMENTAL %+UNL]:{taz} | [%+BENEFACTIVE %+SG]:{arentzat} | [%+BENEFACTIVE %+PL]:{entzat} | [%+BENEFACTIVE %+UNL]:{rentzat} | [%+CAUSAL %+SG]:{arengatik} | [%+CAUSAL %+PL]:{engatik} | [%+CAUSAL %+UNL]:{rengatik} | %+PARTITIVE:{rik} | %+PARTITIVE:{ik} | [%+INESSIVE %+SG]:{ean} | [%+INESSIVE %+SG]:{an} | [%+INESSIVE %+PL]:{etan} | [%+INESSIVE %+UNL]:{tan} | [%+INESSIVE %+UNL]:{en} | [%+INESSIVE %+UNL]:{n} | [%+ALLATIVE %+SG]:{era} | [%+ALLATIVE %+SG]:{ra} | [%+ALLATIVE %+PL]:{etara} | [%+ALLATIVE %+UNL]:{tara} | [%+ALLATIVE %+UNL]:{ra} | [%+ABLATIVE %+SG]:{etik} | [%+ABLATIVE %+SG]:{tik} | [%+ABLATIVE %+PL]:{etatik} | [%+ABLATIVE %+UNL]:{tatik} | [%+ABLATIVE %+UNL]:{tik} | [%+ABLATIVE %+UNL]:{dik}];
+
+read regex PRONOUN PRONOUNCASE;
+
+#--------------------------------------------------------
+
+read regex ADVBCLAUSE;
+
+read regex CONJ;
+
+read regex CONJUNCT;
+
+read regex NUMERAL;
+
+#read regex NUMERAL;
+
+read regex RELATIVE;
+
+read regex PUNCT;
+
+read regex POSTPOS;
+
+union net
+
+save stack eusmor.fst
+
