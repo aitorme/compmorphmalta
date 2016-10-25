@@ -1,0 +1,179 @@
+#######################
+#
+# A simple morphological analyzer for English
+#
+#######################
+
+define NOUN [ e g y p t | c o u r t | c o n v i c t i o n | h o s n i | m u b a r a k |r e t r i a l | c a s e | w a y | p r e s i d e n t | r e l e a s e | y e a r | p r i s o n | m a y | f u n d | p a l a c e | m o n e y | f a m i l y | p r o p e r t y | s o n | j a i l | t e r m | h e a l t h | s e n t e n c e | h e a r t | r u l e | p r o s e c u t o r | d e m o n s t r a t o r | v i c t o r | a u t o c r a c y | d o s t o u r | b r o t h e r h o o d | h o s p i t a l | m a a d i | d i s t r i c t | o f f i c e | c a i r o | s o u r c e | f r e e d o m | t u e s d a y | v e r d i c t | c h a r g e | o f f i c e r | p o l i c e | a i d e | p r o t e s t e r | o p p o n e n t | d e c i s i o n | n o v e m b e r | o v e r t h r o w | f e a r | r i g h t | a u t h o r i t y | t i m e | s p o k e s m a n | b a s i s | o p p o s i t i o n | c a p i t a l i s m | p e r i o d | t r i a l | c r i t i c i s m | f i g u r e | c o n t r a s t | l a w | l a w y e r | d a y | s e r i e s | d e a t h | s q u a r e | c r i t i c | i s s u e | p a r t y | l e a d e r | f a r e e d | e l %- d e e b | t a h r i r | k h a l e d | d a w o u d | m o h a m e d | m u r s i | s i s i | f a t t a h | a b d e l | c h i e f | d e t e n t i o n | a c q u i t t a l | r e v o l t | a l %- s i s i | b a i l | m a y | c r a c k d o w n | t a b l e t | a p p | w e b s i t e | e d i t i o n | n e w s p a p e r | e m b e z z l e m e n t | c o n t e n t | r e p o r t e r | p r e t r i a l | a c t i v i s t | s q u a r e | e %- p a p e r | m a l t a | s u n d a y | t i m e s | s u b s c r i p t i o n | i n v o l v e m e n t | r e p o r t e r | l e a d e r s h i p | e x p e c t a t i o n | n e w s | e l e c t i o n | e g y p t i a n | s u p p o r t e r | c a s s a t i o n | w e e k | a r c h i v e ];
+
+define ADJECTIVE [ o n l y | h i g h | a v a i l a b l e | f o r m e r | p o s s i b l e | p u b l i c | s a m e | i l l | i n t e r n a t i o n a l | f i n a l | m i l i t a r y | u p s c a l e | j u d i c i a l | f r e e | e v e n t u a l | s y m b o l i c | m u s l i m | c r o n y | p o l i t i c a l | e g y p t i a n | o l d | m a x i m u m | l a s t | n e w | m a s s | c h i e f | i s l a m i s t | e x c l u s i v e | f u l l | p r e s i d e n t i a l | s l o w | p r e m i u m ] %+ADJ:0;
+
+define DETERMINER [ t h e | a | h i s | t h e i r | t h a t | m a n y | a n y | a l l | o u r | A l l | t h i s | T h e | A ] %+DET:0;
+
+define VERB [ o v e r t u r n | h a v e | r e m a i n | o r d e r | e m b e z z l e | o p e n | o u s t | b e | s e n t e n c e | d i v e r t |e a r m a r k | r e n o v a t e | u s e | u p g r a d e | g i v e | s u f f e r | s e r v e | k i l l | h e a r | c u r t a i l | w i n | f o l l o w | t h i n k | s h o c k | r u l e | u p r i s e | c o n s p i r e | s e r v e | u s e | i n c a r c e r a t e | s u g g e s t | i n v o l v e | t e l l | l a u n c h | s a y | w a l k | f r e e | c h a r g e | p r o t e s t | e n d | e x p e c t | d r o p | r a i s e | k e e p | l a n g u i s h | s u p p o r t | f a c e | l i v e | v i e w | r e p o r t | p e r m i t | r e t r y | p e n d | c l e a r | e r o d e | a c c e s s | d o w n l o a d | g a i n | s u b s c r i b e | j a i l | d r a w | e n a b l e | e a t | t r y | c l o s e ];
+
+
+define ADVERB [ b e f o r e | n o w | a s | a g o | l e a s t | m o r e | b a c k | a f t e r | a l s o | a n y | l a s t | t h e n | n o t | t h r o u g h | u p | o v e r s e a s | t o d a y | n o | e v e n t u a l l y | t | s l o w l y ] %+ADVB:0;
+
+define PREPOSITION [ a g a i n s t | i n | f o r | t o | f r o m | d u r i n g | o f | a s | w i t h | o v e r | a m o n g | o n | b y | a t | t h r o u g h ] %+PREP:0;
+
+define NUMERAL [ 8 6 | 1 9 3 %0 | t h r e e | t w o | t h o u s a n d | f o u r | 1 8 | h u n d r e d | b o t h | 2 %0 1 1 | 2 %0 1 3 | t h o u s a n d s | h u n d r e d s ] %+NUM:0;
+
+define ORDNUM [ f i r s t | s e c o n d | t h i r d | f o u r t h | t e n t h ] %+ONUM:0;
+
+define CONJUNCTION [ a n d | w h e t h e r | a s | b u t | w h i l e | o r | i f ] %+CONJ:0;
+
+define PRONOUN [ h e | h i m | i | i t | y o u | t h e y | w e | s h e | h e r ] %+PRON:0;
+
+define MODALV [ w i l l | c a n | s h a l l ] %+VB:0;
+
+define MODALP [ {will}:{would} | {can}:{could} | {shall}:{should} ] %+VERB:0 %+VBP:0;
+
+define RELATIVEPRONOUN [ t h i s | t h a t | w h i c h | w h o | w h o s e | w h o m ] %+RELPRON:0;
+
+define PUNCT [ "." | "," | %" | ".." | "(" | ")" ] %+PUNC:0;
+
+#define IS [ i s ];
+
+# -----------------------------------------------------------
+echo >>> rules for verbs
+
+define VERBPOS %+VB:0;
+
+define VERBROOT [ 0 | %+VBZ:s | %+VBD:{ed} | %+VBG:{ing}];
+
+define VERBCAT VERB VERBPOS VERBROOT;
+
+define VERBRULE1 e -> 0 || e _ d;
+
+define VERBRULE2 [] -> t || t _ e d;
+
+define VERBRULE3 e -> 0 || ?* _ i n g;
+
+define VERBRULE4 0 -> p || p _ e d;
+
+define IRREGVERBS [ {throw}:{threw} | {give}:{gave} | {say}:{said} | {lead}:{led} | {draw}:{drew} | {win}:{won} | {do}:{did} | {tell}:{told} | {eat}:{ate} | {cut}:{cut} ] %+VERB:0 %+VBD:0;
+
+define IRREGVERBSPP [ {be}:{been} | {throw}:{thrown} | {say}:{said} | {give}:{given} | {lead}:{led} | {draw}:{drawn} | {win}:{won} | {do}:{done} | {tell}:{told} | {eat}:{eaten} | {cut}:{cut} ] %+VERB:0 %+VBN:0; 
+
+define TOBE3 [{be}:{is}] %+VB:0 %+VBZ:0;
+
+define TOBEP [{be}:{were}] %+VB:0 %+VBD:0;
+
+define TOBEP13 [{be}:{was}] %+VB:0 %+VBD:0;
+
+define TOBE1 [{be}:{am}] %+VB:0 %+VBF:0;
+
+define TOBE2 [{be}:{are}] %+VB:0 %+VB2P:0;
+
+define TOBEING [{be}:{being}] %+VB:0 %+VBG:0;
+
+define DON [{do}:{don}] %+VB:0 %+VBN:0;
+
+define HAVE3 [{have}:{has}] %+VB:0 %+VBZ:0;
+
+define HAVEP [{have}:{had}] %+VB:0 %+VBD:0;
+
+define TOGO [{go}:{went}] %+VB:0 %+VBD:0;
+
+read regex VERBCAT .o. VERBRULE1 .o. VERBRULE2 .o. VERBRULE3 .o. VERBRULE4;
+
+read regex IRREGVERBS;
+
+read regex IRREGVERBSPP;
+
+read regex TOBE3;
+
+read regex TOBEP;
+
+read regex TOBEP13;
+
+read regex TOBE1;
+
+read regex TOBE2;
+
+read regex TOBEING;
+
+read regex DON;
+
+read regex HAVE3;
+
+read regex HAVEP;
+
+read regex TOGO;
+
+# -----------------------------------------------------------
+echo >>> rules for nouns
+
+#define NOUNPOS %+N:0;
+
+define NOUNRULE [[%+NOUN %+SG]:0 | [%+NOUN %+PL]:s];
+
+define NOUNCAT NOUN NOUNRULE;
+
+define NOUNRULE1 y -> i || ?* _ e s .#.;
+
+define PROPERTY [{property}:{properties} | {authority}:{authorities}] [%+NOUN %+SG]:0 [%+NOUN %+PL]:0;
+
+define PEOPLE [{person}:{people}] [%+NOUN %+SG]:0 [%+NOUN %+PL]:0;
+
+define FISH [{fish}:{fish}] [%+NOUN %+SG]:0 [%+NOUN %+PL]:0;
+
+read regex NOUNCAT .o. NOUNRULE1;
+
+read regex PROPERTY;
+
+read regex PEOPLE;
+
+read regex FISH;
+
+#----------------------------------------------------------
+echo >>> adjectives' time
+
+define ADJECTIVEROOT [ 0 | %+COMP:{er} | %+SUPER:{est} ];
+
+define ADJECTIVERULE1 e -> 0 || ?* e _ r;
+
+define ADJECTIVERULE2 e -> 0 || ?* e _ s t;
+
+define ADJECTIVECAT ADJECTIVE ADJECTIVEROOT;
+
+read regex ADJECTIVECAT .o. ADJECTIVERULE1 .o. ADJECTIVERULE2;
+
+#----------------------------------------------------------
+
+define GENITIVE [ s ] %+GEN:0;
+
+read regex GENITIVE;
+
+#read regex WORDS;
+
+read regex ADVERB;
+
+read regex NUMERAL;
+
+read regex ORDNUM;
+
+read regex DETERMINER;
+
+read regex PREPOSITION;
+
+read regex CONJUNCTION;
+
+read regex PRONOUN;
+
+read regex RELATIVEPRONOUN;
+
+read regex MODALV;
+
+read regex MODALP;
+
+read regex PUNCT;
+
+union net
+
+
+save stack morphan.fst
+
+
+#ly, protestER, supportER, reportER, expectation, permitter, thousands, leaderSHIP
